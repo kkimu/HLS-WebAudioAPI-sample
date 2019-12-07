@@ -1,0 +1,5 @@
+node_modules
+server/media
+files/
+
+*.plist
