@@ -84,6 +84,11 @@ class Visualizer {
     window.requestAnimationFrame(this.draw.bind(this))
   }
 
+  dispose() {
+    this.mediaElementAudioSource.disconnect()
+    this.analyser.disconnect()
+  }
+
   drawTop(index: number) {
     const barWidth = window.innerWidth / 128 / 2
     const spacerWidth = barWidth * 2
@@ -205,9 +210,23 @@ export const Audio: React.FC = () => {
     if (!audioRef) return
     const options: VideoJsPlayerOptions = {
       autoplay: false,
+      preload: 'none',
     }
     setPlayer(videojs(audioRef.current, options))
   }, [audioRef])
+
+  useEffect(() => {
+    return () => {
+      visualizer && visualizer.dispose()
+    }
+  }, [visualizer])
+
+  useEffect(() => {
+    return () => {
+      player && player.dispose()
+    }
+  }, [player])
+
 
   return (
     <Wrapper>
