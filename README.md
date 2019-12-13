@@ -6,7 +6,9 @@
 cd server
 node index.js
 ```
-
+```
+./generate_hls.sh
+```
 ```
 cd client
 yarn
