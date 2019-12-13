@@ -145,9 +145,10 @@ export const Audio: React.FC = () => {
   }, [audioCtx, ctx])
 
   const handleClick = useCallback(() => {
+    audioCtx && audioCtx.resume()
     player && player.play()
     visualizer && visualizer.draw()
-  }, [visualizer, player])
+  }, [audioCtx, player, visualizer])
 
   return (
     <Wrapper>
